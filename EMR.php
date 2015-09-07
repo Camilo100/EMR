@@ -1,6 +1,27 @@
 <?php
 
 
+class viaje{
+	public $linea = [];
+	public $monto = [];
+	public $hora = [];
+	public function nuevoViaje($hora, $monto, $linea){
+		$this->hora[] = $hora;
+		$this->monto[] = $monto;
+		$this->linea[] = $linea;
+	}
+	public function viajesRealizados(){
+		print_r($this->hora);
+		print_r($this->monto);
+		print_r($this->linea);
+	}
+
+}
+
+
+
+
+
 class colectivo{
 	public $empresa;
 	public $linea;
@@ -45,51 +66,74 @@ class Normal extends tarjeta{
 	public $ultHora = 0;
 	public function pagarBoleto($linea, $hora){
 		if($this->ultPrecio == 1.90 or $this->ultPrecio == 0 or $this->ultLinea == $linea or $hora-$this->ultHora>1)
-			if($this->saldo >= 5.75){
+		{	
+			if($this->saldo >= 5.75)
+			{
 				$this->saldo = $this->saldo-5.75;
 				$this->ultPrecio = 5.75;
 				$this->ultLinea = $linea;
 				$this->ultHora = $hora;
 				return true;
 			}
-			else{return false;}
-		elseif($this->ultPrecio != 1.90 and $this->ultLinea != $linea and 1>$hora-$this->ultHora){
-			if($this->saldo >= 1.90){
+			else
+			{
+				return false;
+			}
+		}
+		elseif($this->ultPrecio != 1.90 and $this->ultLinea != $linea and 1>$hora-$this->ultHora)
+		{
+			if($this->saldo >= 1.90)
+			{
 				$this->saldo = $this->saldo-1.90;
 				$this->ultPrecio = 1.90;
 				$this->ultLinea = $linea;
 				$this->ultHora = $hora;
+			}
 		}
 	}
-
-}
 }
 
 class MedioBoleto extends normal{
 	public $ultPrecio = 0;
 	public $ultLinea = 0;
 	public $ultHora = 0;
-	public function pagarBoleto($linea, $hora){
-		if (6 > $hora )
+	public function pagarBoleto($linea, $hora)
+	{
+		if (6 > $hora)
 		{
-				if($this->ultPrecio == 1.90 or $this->ultPrecio == 0 or $this->ultLinea == $linea or $hora-$this->ultHora>1)
-			if($this->saldo >= 5.75){
-				$this->saldo = $this->saldo-5.75;
-				$this->ultPrecio = 5.75;
-				$this->ultLinea = $linea;
-				$this->ultHora = $hora;
-				return true;
+			if($this->ultPrecio == 1.90 or $this->ultPrecio == 0 or $this->ultLinea == $linea or $hora-$this->ultHora>1)
+			{
+				if($this->saldo >= 5.75)
+				{
+					$this->saldo = $this->saldo-5.75;
+					$this->ultPrecio = 5.75;
+					$this->ultLinea = $linea;
+					$this->ultHora = $hora;
+					return true;
+				}
+				else
+				{
+					return false;
+				}
 			}
-			else{return false;}
-		elseif($this->ultPrecio != 1.90 and $this->ultLinea != $linea and 1>$hora-$this->ultHora){
-			if($this->saldo >= 1.90){
-				$this->saldo = $this->saldo-1.90;
-				$this->ultPrecio = 1.90;
-				$this->ultLinea = $linea;
-				$this->ultHora = $hora;
-		}
-	}
-		}
+			else
+			{
+				if($this->ultPrecio != 1.90 and $this->ultLinea != $linea and 1>$hora-$this->ultHora)
+				{
+					if($this->saldo >= 1.90)
+					{
+						$this->saldo = $this->saldo-1.90;
+						$this->ultPrecio = 1.90;
+						$this->ultLinea = $linea;
+						$this->ultHora = $hora;
+					}
+					else
+					{
+						return false;
+					}
+				}
+			}
+		}	
 		else
 		{
 			if($ultPrecio == 0.80 or $ultLinea == $linea or $hora-$ultHora>1)
@@ -101,27 +145,35 @@ class MedioBoleto extends normal{
 					$this->ultLinea = $linea;
 					$this->ultHora = $hora;
 					return true;
+				}	
+				else
+				{
+					return false;
 				}
 			}	
-				else{return false;}
-			elseif($ultPrecio != 0.80 and $ultLinea != $linea and 1>$hora-$ultHora)
+			else 
 			{
-				if($this->saldo > 0.80)
+				if($ultPrecio != 0.80 and $ultLinea != $linea and 1>$hora-$ultHora)
 				{
-					$this->saldo = $this->saldo-0.80;
-					$this->ultPrecio = 0.80;
-					$this->ultLinea = $linea;
-					$this->ultHora = $hora;
+					if($this->saldo > 0.80)
+					{
+						$this->saldo = $this->saldo-0.80;
+						$this->ultPrecio = 0.80;
+						$this->ultLinea = $linea;
+						$this->ultHora = $hora;
+					}
 				}
-			}
-
+ 			}
 		} 
+	}
 }
 
 $miTarjeta = new normal();
 $miTarjeta->recarga(15);
 $miTarjeta->pagarBoleto(143, 20);
 $miTarjeta->pagarBoleto(142, 20.30);
+$miTarjeta->pagarBoleto(141, 20.35);
+$miTarjeta->pagarBoleto(142, 22.30);
 
 echo $miTarjeta->saldo();
 
