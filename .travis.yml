@@ -11,4 +11,4 @@ matrix:
   
   fast_finish: true
 
-script: phpunit Test/testEMR.php
+script: phpunit test/EMRTest.php
