@@ -1,7 +1,8 @@
 <?php
 require 'EMR.php';
-function test1($miTarjeta){
 
+#Una recarga de 15 un viaje normal un transbordo y otro normal
+function test1($miTarjeta){
 	$miTarjeta->recarga(15);
 	$miTarjeta->pagarBoleto(143, 20.00);
 	$miTarjeta->pagarBoleto(142, 20.30);
@@ -11,9 +12,8 @@ function test1($miTarjeta){
 		echo "Test 1 no superado <br>";
 	}
 }
-
+#Una recarga de 15 dos viajes pagados con la misma tarjeta y otro normal
 function test2($miTarjeta){
-
 	$miTarjeta->recarga(15);
 	$miTarjeta->pagarBoleto(143, 20.00);
 	$miTarjeta->pagarBoleto(143, 20.01);
@@ -23,7 +23,31 @@ function test2($miTarjeta){
 		echo "Test 2 no superado <br>";
 	}
 }
+#Una recarga de 15 dos viajes pagados con la misma tarjeta y un transbordo
+function test3($miTarjeta){
+	$miTarjeta->recarga(15);
+	$miTarjeta->pagarBoleto(143, 20.00);
+	$miTarjeta->pagarBoleto(143, 20.01);
+	$miTarjeta->pagarBoleto(141, 21);
+	if($miTarjeta->saldo() != 3 and $miTarjeta->saldo() != 10.50)
+	{
+		echo "Test 3 no superado <br>";
+	}
+}
 
+
+#Una recarga de 15 un viaje en una linea un transbordo en otra y otro normal 
+function test4($miTarjeta){
+	$miTarjeta->recarga(15);
+	$miTarjeta->pagarBoleto(143, 20.00);
+	$miTarjeta->pagarBoleto(142, 20.01);
+	$miTarjeta->pagarBoleto(142, 20.02);
+	if($miTarjeta->saldo() != 9 and $miTarjeta->saldo() != 3)
+	{
+		echo "Test 4 no superado <br>";
+	}
+}
+/*
 function test3($miTarjeta){
 
 	$miTarjeta->recarga(15);
@@ -36,7 +60,7 @@ function test3($miTarjeta){
 		echo "Test 3 no superado <br>";
 	}
 }
-
+*/
 
 
 
