@@ -21,14 +21,16 @@ class colectivo{
 		$this->linea = $linea;
 		$this->interno = $interno;
 	}
+
 }
+
 
 abstract class tarjeta{
 	public $saldo=0;
 	public $viajes = [];
 	public function recarga($monto){
 		if ($monto >= 196){
-		$this->saldo = 34 +$this->saldo + $monto;
+		$this->saldo = 34 + $this->saldo + $monto;
 		}
 		elseif ($monto >= 368) {
 			$this->saldo = 92 +$this->saldo + $monto;
@@ -41,6 +43,9 @@ abstract class tarjeta{
 		return $this->saldo;
 	}
 	public function viajesRealizados()
+	{
+		print_r($this->viajes);
+	}
 
 
 }
@@ -49,35 +54,39 @@ class Normal extends tarjeta{
 	public $ultLinea = 0;
 	public $ultHora = 0;
 	public function pagarBoleto($linea, $hora){
-		if($this->ultPrecio == 1.90 or $this->ultPrecio == 0 or $this->ultLinea == $linea or $hora-$this->ultHora>1)
+		if($this->ultPrecio == 2 or $this->ultPrecio == 0 or $this->ultLinea == $linea or $hora-$this->ultHora>1)
 		{	
-			if($this->saldo >= 5.75)
+			if($this->saldo >= 5)
 			{
-				$this->saldo = $this->saldo-5.75;
-				$this->ultPrecio = 5.75;
+				$this->saldo = $this->saldo-5;
+				$this->ultPrecio = 5;
 				$this->ultLinea = $linea;
 				$this->ultHora = $hora;
-				$this->viaje[] = new viaje($linea, $hora, );
+				$this->viaje[] = new viaje($linea, $hora, 5);
+				//echo "Viaje realizado con exito en la linea "."$linea"." a la hora "."$hora"."<br>";
 				return true;
 			}
 			else
 			{
+				//echo "El viaje no se pudo realizar tienes $". "$this->saldo". " en tu tarjeta". " y necesitas $5 <br>";
 				return false;
 			}
 		}
-		elseif($this->ultPrecio != 1.90 and $this->ultLinea != $linea and 1>$hora-$this->ultHora)
+		elseif($this->ultPrecio != 2 and $this->ultLinea != $linea and 1>$hora-$this->ultHora)
 		{
-			if($this->saldo >= 1.90)
+			if($this->saldo >= 2)
 			{
-				$this->saldo = $this->saldo-1.90;
-				$this->ultPrecio = 1.90;
+				$this->saldo = $this->saldo-2;
+				$this->ultPrecio = 2;
 				$this->ultLinea = $linea;
 				$this->ultHora = $hora;
-				$this->misViajes->nuevoViaje($linea, $hora, 1.90);
+				$this->viaje[] = new viaje($linea, $hora, 2);
+				//echo "Viaje realizado con exito en la linea "."$linea"." a la hora "."$hora"."<br>";
 				return true;
 			}
 			else
 			{
+				//echo "El viaje no se pudo realizar tienes $". "$this->saldo". " en tu tarjeta"." y necesitas $2<br>";
 				return false;
 			}
 		}
@@ -92,37 +101,41 @@ class MedioBoleto extends normal{
 	{
 		if (6 > $hora)
 		{
-			if($this->ultPrecio == 1.90 or $this->ultPrecio == 0 or $this->ultLinea == $linea or $hora-$this->ultHora>1)
+			if($this->ultPrecio == 2 or $this->ultPrecio == 0 or $this->ultLinea == $linea or $hora-$this->ultHora>1)
 			{
-				if($this->saldo >= 5.75)
+				if($this->saldo >= 5)
 				{
-					$this->saldo = $this->saldo-5.75;
-					$this->ultPrecio = 5.75;
+					$this->saldo = $this->saldo - 5;
+					$this->ultPrecio = 5;
 					$this->ultLinea = $linea;
 					$this->ultHora = $hora;
-					$this->misViajes->nuevoViaje($linea, $hora, 5.75);
+					$this->viaje[] = new viaje($linea, $hora, 5);
+					//echo "Viaje realizado con exito en la linea "."$linea"." a la hora "."$hora"."<br>";
 					return true;
 				}
 				else
 				{
+					//echo "El viaje no se pudo realizar tienes $". "$this->saldo". " en tu tarjeta"." y necesitas $5 <br>";
 					return false;
 				}
 			}
 			else
 			{
-				if($this->ultPrecio != 1.90 and $this->ultLinea != $linea and 1>$hora-$this->ultHora)
+				if($this->ultPrecio != 2 and $this->ultLinea != $linea and 1>$hora-$this->ultHora)
 				{
-					if($this->saldo >= 1.90)
+					if($this->saldo >= 2)
 					{
-						$this->saldo = $this->saldo-1.90;
-						$this->ultPrecio = 1.90;
+						$this->saldo = $this->saldo-2;
+						$this->ultPrecio = 2;
 						$this->ultLinea = $linea;
 						$this->ultHora = $hora;
-						$this->misViajes->nuevoViaje($linea, $hora, 1.90);
+						$this->viaje[] = new viaje($linea, $hora, 2);
+						//echo "Viaje realizado con exito en la linea "."$linea"." a la hora "."$hora"."<br>";;
 						return true;
 					}
 					else
 					{
+						//echo "El viaje no se pudo realizar tienes $". "$this->saldo". " en tu tarjeta"." y necesitas <br>";
 						return false;
 					}
 				}
@@ -130,47 +143,65 @@ class MedioBoleto extends normal{
 		}	
 		else
 		{
-			if($ultPrecio == 0.80 or $ultLinea == $linea or $hora-$ultHora>1)
+			if($this->ultPrecio == 1 or $this->ultLinea == $linea or $hora-$this->ultHora>1)
 			{
-				if($this->saldo > 3)
+				if($this->saldo > 2.50)
 				{
-					$this->saldo = $this->saldo-3;
-					$this->ultPrecio = 3;
+					$this->saldo = $this->saldo-2.50;
+					$this->ultPrecio = 2.50;
 					$this->ultLinea = $linea;
 					$this->ultHora = $hora;
-					$this->misViajes->nuevoViaje($linea, $hora, 3);
+					$this->viaje[] = new viaje($linea, $hora, 2.50);
+					//echo "Viaje realizado con exito en la linea "."$linea"." a la hora "."$hora"."<br>";
 					return true;
 				}	
 				else
 				{
+					//echo "El viaje no se pudo realizar tienes $". "$this->saldo". " en tu tarjeta"." y necesitas $2.50 <br>";
 					return false;
 				}
 			}	
 			else 
 			{
-				if($ultPrecio != 0.80 and $ultLinea != $linea and 1>$hora-$ultHora)
+				if($this->ultPrecio != 1 and $this->ultLinea != $linea and 1>$hora-$this->ultHora)
 				{
-					if($this->saldo > 0.80)
+					if($this->saldo > 1)
 					{
-						$this->saldo = $this->saldo-0.80;
-						$this->ultPrecio = 0.80;
+						$this->saldo = $this->saldo-1;
+						$this->ultPrecio = 1;
 						$this->ultLinea = $linea;
 						$this->ultHora = $hora;
-						$this->misViajes->nuevoViaje($linea, $hora, 0.80);
+						$this->viaje[] = new viaje($linea, $hora, 1);
+						//echo "Viaje realizado con exito en la linea "."$linea"." a la hora "."$hora"."<br>";
+						return true;
+					}	
+					else
+					{
+						//echo "El viaje no se pudo realizar tienes $". "$this->saldo". " en tu tarjeta"." y necesitas $2.50 <br>";
+						return false;
 					}
 				}
  			}
 		} 
 	}
 }
-
+/*
 $miTarjeta = new normal();
+$miMedio = new MedioBoleto();
 $miTarjeta->recarga(15);
 $miTarjeta->pagarBoleto(143, 20);
-$miTarjeta->pagarBoleto(142, 20.30);
-$miTarjeta->pagarBoleto(141, 20.35);
-$miTarjeta->pagarBoleto(142, 22.30);
-$miTarjeta->viajesRealizados
+$miTarjeta->pagarBoleto(142, 20.3);
+$miTarjeta->pagarBoleto(141, 20.3);
+$miTarjeta->pagarBoleto(142, 22);
+$miTarjeta->saldo();
+$miMedio->recarga(15);
+$miMedio->viajesRealizados();
+$miMedio->pagarBoleto(143, 20);
+$miMedio->pagarBoleto(142, 20);
+$miMedio->pagarBoleto(141, 20);
+$miMedio->pagarBoleto(142, 22);
+$miMedio->saldo();
+$miMedio->viajesRealizados();
 echo $miTarjeta->saldo();
-
+*/
 ?> 
