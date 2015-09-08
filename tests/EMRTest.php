@@ -3,7 +3,7 @@ require 'EMR.php';
 
 class normalTest extends PHPUnit_Framework_TestCase{
 
-	protected $this->miTarjeta;
+	protected miTarjeta;
 
     protected function setUp(){
         $this->miTarjeta = new  normal();
@@ -56,7 +56,7 @@ class normalTest extends PHPUnit_Framework_TestCase{
 
 class MedioBoletoTest extends PHPUnit_Framework_TestCase{
 
-	protected $this->miTarjeta;
+	protected miTarjeta;
 
     protected function setUp(){
         $this->miTarjeta = new  MedioBoleto();
