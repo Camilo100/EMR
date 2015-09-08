@@ -1,83 +1,109 @@
 <?php
 require 'EMR.php';
 
-#Una recarga de 15 un viaje normal un transbordo y otro normal
-function test1($miTarjeta){
-	$miTarjeta->recarga(15);
-	$miTarjeta->pagarBoleto(143, 20.00);
-	$miTarjeta->pagarBoleto(142, 20.30);
-	$miTarjeta->pagarBoleto(141, 22.00);
-	assert($miTarjeta->saldo() != 9 and $miTarjeta->saldo() != 3 )
+class normalTest extends PHPUnit_Framework_TestCase{
+
+	protected $this->miTarjeta;
+
+    protected function setUp(){
+        $this->miTarjeta = new  normal();
+    }
+	#Una recarga de 15 
+	public function testRecarga(){
+		$this->miTarjeta->recarga(15);
+		$this->assertEquals(15, $this->miTarjeta->saldo());	
+	}
+
+	#Viaje normal
+	public function testViajeNormalF(){
+		$this->assertEquals(false, $this->miTarjeta->pagarBoleto(143, 20.00);
+		
+	}
 	
-}
-#Una recarga de 15 dos viajes pagados con la misma tarjeta y otro normal
-function test2($miTarjeta){
-	$miTarjeta->recarga(15);
-	$miTarjeta->pagarBoleto(143, 20.00);
-	$miTarjeta->pagarBoleto(143, 20.01);
-	$miTarjeta->pagarBoleto(141, 22);
-	assert($miTarjeta->saldo() != 0 and $miTarjeta->saldo() != 7.50)
-}
-#Una recarga de 15 dos viajes pagados con la misma tarjeta y un transbordo
-function test3($miTarjeta){
-	$miTarjeta->recarga(15);
-	$miTarjeta->pagarBoleto(143, 20.00);
-	$miTarjeta->pagarBoleto(143, 20.01);
-	$miTarjeta->pagarBoleto(141, 21);
-	assert($miTarjeta->saldo() != 3 and $miTarjeta->saldo() != 10.50)
-}
-
-
-#Una recarga de 15 un viaje en una linea un transbordo en otra y otro normal 
-function test4($miTarjeta){
-	$miTarjeta->recarga(15);
-	$miTarjeta->pagarBoleto(143, 20.00);
-	$miTarjeta->pagarBoleto(142, 20.01);
-	$miTarjeta->pagarBoleto(142, 20.02);
-	assert($miTarjeta->saldo() != 9 and $miTarjeta->saldo() != 3)
+	#Una recarga de 15 y un viaje normal
+	public function testViajeNormal(){
+		$this->miTarjeta->recarga(15);
+		$this->miTarjeta->pagarBoleto(143, 20.00);
+		$this->assertEquals(10, $this->miTarjeta->saldo());
+		
 	}
-/*
-function test3($miTarjeta){
+	#Una recarga de 15, un viaje normal y un transbordo
+	public function testTransbordo(){
+		$this->miTarjeta->recarga(5);
+		$this->miTarjeta->pagarBoleto(143, 20.00);
+		$this->assertEquals(false, $this->miTarjeta->pagarBoleto(142, 20.30));
 
-	$miTarjeta->recarga(15);
-	$miTarjeta->pagarBoleto(143, 20.00);
-	$miTarjeta->pagarBoleto(143, 22.00);
-	$miTarjeta->pagarBoleto(141, 00.00);
-	assert($miTarjeta->pagarBoleto(141, 05.00)){}
-	else
-	{
-		echo "Test 3 no superado <br>";
+
+	#Una recarga de 5, un viaje normal y un transbordo
+	public function testTransbordoF(){
+		$this->miTarjeta->recarga(15);
+		$this->miTarjeta->pagarBoleto(143, 20.00);
+		$this->assertEquals(false, $this->miTarjeta->pagarBoleto(142, 20.30);	
 	}
+
+	#Una recarga de 15 y dos viajes pagados con la misma tarjeta 
+	public function testDosViajes(){
+		$this->miTarjeta->recarga(15);
+		$this->miTarjeta->pagarBoleto(143, 20.00);
+		$this->miTarjeta->pagarBoleto(143, 20.01);
+		$this->assertEquals(5, $this->miTarjeta->saldo());
+	}
+
 }
-*/
 
 
 
 
-$miMedio = new MedioBoleto();
-$miTarjeta = new normal();
-$miTarjeta2 = new normal();
-$miMedio2 = new MedioBoleto();
-assert(2 == 1);
-/*
-test1($miMedio);
-test1($miTarjeta);
+class MedioBoletoTest extends PHPUnit_Framework_TestCase{
 
-test2($miMedio2);
-test2($miTarjeta2);
+	protected $this->miTarjeta;
 
-test3($miTarjeta2);
+    protected function setUp(){
+        $this->miTarjeta = new  MedioBoleto();
+    }
+	#Una recarga de 15 
+	public function testRecarga(){
+		$this->miTarjeta->recarga(15);
+		$this->assertEquals(15, $this->miTarjeta->saldo());	
+	}
+
+	#Viaje normal
+	public function testViajeNormalF(){
+		$this->assertEquals(false, $this->miTarjeta->pagarBoleto(143, 20.00);
+		
+	}
+	
+	#Una recarga de 15 y un viaje normal
+	public function testViajeNormal(){
+		$this->miTarjeta->recarga(15);
+		$this->miTarjeta->pagarBoleto(143, 20.00);
+		$this->assertEquals(12.5, $this->miTarjeta->saldo());
+		
+	}
+	#Una recarga de 15, un viaje normal y un transbordo
+	public function testTransbordo(){
+		$this->miTarjeta->recarga(15);
+		$this->miTarjeta->pagarBoleto(143, 20.00);
+		$this->miTarjeta->pagarBoleto(142, 20.30);
+		$this->assertEquals(11.50, $this->miTarjeta->saldo() );
 
 
-$miTarjeta->pagarBoleto(142, 22);
-$miTarjeta->saldo();
-$miMedio->recarga(15);
-$miMedio->viajesRealizados();
-$miMedio->pagarBoleto(143, 20);
-$miMedio->pagarBoleto(142, 20);
-$miMedio->pagarBoleto(141, 20);
-$miMedio->pagarBoleto(142, 22);
-$miMedio->saldo();
-$miMedio->viajesRealizados();
-*/
+	#Una recarga de 5, un viaje normal y un transbordo
+	public function testTransbordoF(){
+		$this->miTarjeta->recarga(2.50);
+		$this->miTarjeta->pagarBoleto(143, 20.00);
+		$this->assertEquals(false, $this->miTarjeta->pagarBoleto(142, 20.30);	
+	}
+
+	#Una recarga de 15 y dos viajes pagados con la misma tarjeta 
+	public function testDosViajes(){
+		$this->miTarjeta->recarga(15);
+		$this->miTarjeta->pagarBoleto(143, 20.00);
+		$this->miTarjeta->pagarBoleto(143, 20.01);
+		$this->assertEquals(10, $this->miTarjeta->saldo());
+	}
+
+}
+
+
 ?> 
