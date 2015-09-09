@@ -16,7 +16,7 @@ class normalTest extends PHPUnit_Framework_TestCase{
 
 	#Viaje normal
 	public function testViajeNormalF(){
-		$this->assertEquals(false, $this->miTarjeta->pagarBoleto(143, 20.00);
+		$this->assertEquals(false, $this->miTarjeta->pagarBoleto(143, 20.00));
 	}
 	
 	#Una recarga de 15 y un viaje normal
@@ -37,7 +37,7 @@ class normalTest extends PHPUnit_Framework_TestCase{
 	public function testTransbordoF(){
 		$this->miTarjeta->recarga(15);
 		$this->miTarjeta->pagarBoleto(143, 20.00);
-		$this->assertEquals(false, $this->miTarjeta->pagarBoleto(142, 20.30);	
+		$this->assertEquals(false, $this->miTarjeta->pagarBoleto(142, 20.30));	
 	}
 
 	#Una recarga de 15 y dos viajes pagados con la misma tarjeta 
@@ -68,7 +68,7 @@ class MedioBoletoTest extends PHPUnit_Framework_TestCase{
 
 	#Viaje normal
 	public function testViajeNormalF(){
-		$this->assertEquals(false, $this->miTarjeta->pagarBoleto(143, 20.00);
+		$this->assertEquals(false, $this->miTarjeta->pagarBoleto(143, 20.00));
 		
 	}
 	
@@ -84,14 +84,14 @@ class MedioBoletoTest extends PHPUnit_Framework_TestCase{
 		$this->miTarjeta->recarga(15);
 		$this->miTarjeta->pagarBoleto(143, 20.00);
 		$this->miTarjeta->pagarBoleto(142, 20.30);
-		$this->assertEquals(11.50, $this->miTarjeta->saldo() );
+		$this->assertEquals(11.50, $this->miTarjeta->saldo());
 
 
 	#Una recarga de 5, un viaje normal y un transbordo
 	public function testTransbordoF(){
 		$this->miTarjeta->recarga(2.50);
 		$this->miTarjeta->pagarBoleto(143, 20.00);
-		$this->assertEquals(false, $this->miTarjeta->pagarBoleto(142, 20.30);	
+		$this->assertEquals(false, $this->miTarjeta->pagarBoleto(142, 20.30));	
 	}
 
 	#Una recarga de 15 y dos viajes pagados con la misma tarjeta 
