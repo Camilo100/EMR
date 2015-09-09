@@ -3,7 +3,7 @@ require 'EMR.php';
 
 class normalTest extends PHPUnit_Framework_TestCase{
 
-	protected miTarjeta;
+	protected $miTarjeta;
 
     protected function setUp(){
         $this->miTarjeta = new  normal();
@@ -17,7 +17,6 @@ class normalTest extends PHPUnit_Framework_TestCase{
 	#Viaje normal
 	public function testViajeNormalF(){
 		$this->assertEquals(false, $this->miTarjeta->pagarBoleto(143, 20.00);
-		
 	}
 	
 	#Una recarga de 15 y un viaje normal
@@ -56,7 +55,7 @@ class normalTest extends PHPUnit_Framework_TestCase{
 
 class MedioBoletoTest extends PHPUnit_Framework_TestCase{
 
-	protected miTarjeta;
+	protected $miTarjeta;
 
     protected function setUp(){
         $this->miTarjeta = new  MedioBoleto();
