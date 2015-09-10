@@ -11,7 +11,7 @@ class normalTest extends PHPUnit_Framework_TestCase{
     
 	#Viaje normal
 	public function testViajeNormalF(){
-		$this->assertFasle($this->miTarjeta->pagarBoleto(143, 20.00));
+		$this->assertFalse($this->miTarjeta->pagarBoleto(143, 20.00));
 	}
 	
 	#Una recarga de 15 
