@@ -31,13 +31,14 @@ class normalTest extends PHPUnit_Framework_TestCase{
 	public function testTransbordo(){
 		$this->miTarjeta->recarga(5);
 		$this->miTarjeta->pagarBoleto(143, 20.00);
-		$this->assertEquals(false, $this->miTarjeta->pagarBoleto(142, 20.30));
+		$this->miTarjeta->pagarBoleto(142, 20.30)
+		$this->assertEquals(8, $this->miTarjeta->saldo());
 	}
 
 	
 	#Una recarga de 5, un viaje normal y un transbordo
 	public function testTransbordoF(){
-		$this->miTarjeta->recarga(15);
+		$this->miTarjeta->recarga(5);
 		$this->miTarjeta->pagarBoleto(143, 20.00);
 		$this->assertFalse($this->miTarjeta->pagarBoleto(142, 20.30));	
 	}
@@ -49,10 +50,7 @@ class normalTest extends PHPUnit_Framework_TestCase{
 		$this->miTarjeta->pagarBoleto(143, 20.01);
 		$this->assertEquals(5, $this->miTarjeta->saldo());
 	}
-
 }
-
-
 
 
 class MedioBoletoTest extends PHPUnit_Framework_TestCase{
