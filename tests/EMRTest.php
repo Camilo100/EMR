@@ -34,13 +34,14 @@ class normalTest extends PHPUnit_Framework_TestCase{
 		$this->assertEquals(false, $this->miTarjeta->pagarBoleto(142, 20.30));
 	}
 
+	/*
 	#Una recarga de 5, un viaje normal y un transbordo
 	public function testTransbordoF(){
 		$this->miTarjeta->recarga(15);
 		$this->miTarjeta->pagarBoleto(143, 20.00);
 		$this->assertEquals(false, $this->miTarjeta->pagarBoleto(142, 20.30));	
 	}
-
+	*/
 	#Una recarga de 15 y dos viajes pagados con la misma tarjeta 
 	public function testDosViajes(){
 		$this->miTarjeta->recarga(15);
