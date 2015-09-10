@@ -29,7 +29,7 @@ class normalTest extends PHPUnit_Framework_TestCase{
 
 	#Una recarga de 15, un viaje normal y un transbordo
 	public function testTransbordo(){
-		$this->miTarjeta->recarga(5);
+		$this->miTarjeta->recarga(15);
 		$this->miTarjeta->pagarBoleto(143, 20.00);
 		$this->miTarjeta->pagarBoleto(142, 20.30);
 		$this->assertEquals(8, $this->miTarjeta->saldo());
