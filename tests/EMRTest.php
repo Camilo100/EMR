@@ -8,12 +8,12 @@ class normalTest extends PHPUnit_Framework_TestCase{
     protected function setUp(){
         $this->miTarjeta = new  normal();
     }
-
+    /*
 	#Viaje normal
 	public function testViajeNormalF(){
 		$this->assertEquals(false, $this->miTarjeta->pagarBoleto(143, 20.00));
 	}
-
+	*/
 	#Una recarga de 15 
 	public function testRecarga(){
 		$this->miTarjeta->recarga(15);
