@@ -185,23 +185,11 @@ class MedioBoleto extends normal{
 		} 
 	}
 }
-/*
+
 $miTarjeta = new normal();
-$miMedio = new MedioBoleto();
-$miTarjeta->recarga(15);
-$miTarjeta->pagarBoleto(143, 20);
-$miTarjeta->pagarBoleto(142, 20.3);
-$miTarjeta->pagarBoleto(141, 20.3);
-$miTarjeta->pagarBoleto(142, 22);
-$miTarjeta->saldo();
-$miMedio->recarga(15);
-$miMedio->viajesRealizados();
-$miMedio->pagarBoleto(143, 20);
-$miMedio->pagarBoleto(142, 20);
-$miMedio->pagarBoleto(141, 20);
-$miMedio->pagarBoleto(142, 22);
-$miMedio->saldo();
-$miMedio->viajesRealizados();
-echo $miTarjeta->saldo();
-*/
+ if($miTarjeta->pagarBoleto(142, 20.3) == false){
+ 	echo "sada";
+ }
+
+
 ?> 
