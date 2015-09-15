@@ -2,7 +2,6 @@
 require 'EMR.php';
 
 
-
 class MedioBoletoTest extends PHPUnit_Framework_TestCase{
 
 	protected $miTarjeta;
@@ -10,6 +9,11 @@ class MedioBoletoTest extends PHPUnit_Framework_TestCase{
     protected function setUp(){
         $this->miTarjeta = new  MedioBoleto();
     }
+
+    #Saldo
+	public function testRecarga(){
+		$this->assertEquals(0, $this->miTarjeta->saldo());	
+	}
 
 	#Una recarga de 15 
 	public function testRecarga(){

@@ -5,11 +5,14 @@ class viaje{
 	public $linea;
 	public $monto;
 	public $hora;
-	function __construct($linea, $monto, $hora){
+	function __construct($linea, $hora, $monto){
 		$this->linea = $linea;
 		$this->monto = $monto;
 		$this->hora = $hora;
 	}
+	public function __toString() {
+            return "$this->linea "." $this->monto "." $this->hora";
+    }
 }
 
 class colectivo{
@@ -44,7 +47,9 @@ abstract class tarjeta{
 	}
 	public function viajesRealizados()
 	{
-		print_r($this->viajes);
+		for($i=0;count($this->viajes)>$i;$i++)
+		echo $this->viajes[$i]."<br>";
+		 
 	}
 
 
@@ -62,7 +67,7 @@ class Normal extends tarjeta{
 				$this->ultPrecio = 5;
 				$this->ultLinea = $linea;
 				$this->ultHora = $hora;
-				$this->viaje[] = new viaje($linea, $hora, 5);
+				$this->viajes[] = new viaje($linea, $hora, 5);
 				//echo "Viaje realizado con exito en la linea "."$linea"." a la hora "."$hora"."<br>";
 				return true;
 			}
@@ -80,7 +85,7 @@ class Normal extends tarjeta{
 				$this->ultPrecio = 2;
 				$this->ultLinea = $linea;
 				$this->ultHora = $hora;
-				$this->viaje[] = new viaje($linea, $hora, 2);
+				$this->viajes[] = new viaje($linea, $hora, 2);
 				//echo "Viaje realizado con exito en la linea "."$linea"." a la hora "."$hora"."<br>";
 				return true;
 			}
@@ -93,7 +98,7 @@ class Normal extends tarjeta{
 	}
 }
 
-class MedioBoleto extends normal{
+class MedioBoleto extends tarjeta{
 	public $ultPrecio = 0;
 	public $ultLinea = 0;
 	public $ultHora = 0;
@@ -109,7 +114,7 @@ class MedioBoleto extends normal{
 					$this->ultPrecio = 5;
 					$this->ultLinea = $linea;
 					$this->ultHora = $hora;
-					$this->viaje[] = new viaje($linea, $hora, 5);
+					$this->viajes[] = new viaje($linea, $hora, 5);
 					//echo "Viaje realizado con exito en la linea "."$linea"." a la hora "."$hora"."<br>";
 					return true;
 				}
@@ -129,7 +134,7 @@ class MedioBoleto extends normal{
 						$this->ultPrecio = 2;
 						$this->ultLinea = $linea;
 						$this->ultHora = $hora;
-						$this->viaje[] = new viaje($linea, $hora, 2);
+						$this->viajes[] = new viaje($linea, $hora, 2);
 						//echo "Viaje realizado con exito en la linea "."$linea"." a la hora "."$hora"."<br>";;
 						return true;
 					}
@@ -151,7 +156,7 @@ class MedioBoleto extends normal{
 					$this->ultPrecio = 2.50;
 					$this->ultLinea = $linea;
 					$this->ultHora = $hora;
-					$this->viaje[] = new viaje($linea, $hora, 2.50);
+					$this->viajes[] = new viaje($linea, $hora, 2.50);
 					//echo "Viaje realizado con exito en la linea "."$linea"." a la hora "."$hora"."<br>";
 					return true;
 				}	
@@ -171,7 +176,7 @@ class MedioBoleto extends normal{
 						$this->ultPrecio = 1;
 						$this->ultLinea = $linea;
 						$this->ultHora = $hora;
-						$this->viaje[] = new viaje($linea, $hora, 1);
+						$this->viajes[] = new viaje($linea, $hora, 1);
 						//echo "Viaje realizado con exito en la linea "."$linea"." a la hora "."$hora"."<br>";
 						return true;
 					}	
@@ -186,10 +191,12 @@ class MedioBoleto extends normal{
 	}
 }
 
-$miTarjeta = new normal();
- if($miTarjeta->pagarBoleto(142, 20.3) == false){
- 	echo "sada";
- }
-
+$miTarjeta = new Normal();
+$miTarjeta->recarga(20);
+$miTarjeta->pagarBoleto(141, 20.30);
+$miTarjeta->pagarBoleto(142, 20.31);
+$miTarjeta->pagarBoleto(143, 20.32);
+$miTarjeta->pagarBoleto(144, 20.33);
+$miTarjeta->viajesRealizados();
 
 ?> 
