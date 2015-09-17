@@ -11,4 +11,5 @@ matrix:
   
   fast_finish: true
 
-script: phpunit tests/EMRTest.php
+script: phpunit tests/NormalTest.php
+script:	phpunit tests/MedioBoletoTest.php
